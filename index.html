@@ -3,50 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Alejandro - Prueba Git</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e0f7fa; /* Un color celeste claro de fondo */
-            color: #333;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: inline-block;
-        }
-        h1 {
-            color: #01579b; /* Azul oscuro para el título */
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin: 10px 0;
-            background-color: #b3e5fc;
-            padding: 8px;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Tienda Estilo Totto - Catálogo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>¡Hola GitHub! Soy Alejandro</h1>
-        <p>Este es mi primer proyecto de prueba para aprender Git y GitHub.</p>
-        
-        <h2>Mis Tecnologías:</h2>
-        <ul>
-            <li>HTML (¡Lo que mejor entiendo!)</li>
-            <li>Java (En proceso...)</li>
-            <li>Python (Próximamente...)</li>
-        </ul>
 
-        <p style="margin-top: 20px; font-style: italic;">"¡Objetivo: Dominar Git esta semana!"</p>
-    </div>
+    <header>
+        <div class="top-bar">Tu confianza es nuestra prioridad en cada entrega.</div>
+        <nav class="main-nav">
+            <div class="logo">MODA<span>SC</span></div>
+            <ul class="menu">
+                <li>VIAJE</li>
+                <li>MOCHILAS</li>
+                <li>ROPA</li>
+                <li>HOMBRE</li>
+                <li>MUJER</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <aside class="filters">
+            <h3>Filtrar por</h3>
+            <div class="filter-group">
+                <details open>
+                    <summary>Género</summary>
+                    <label><input type="checkbox"> Hombre</label>
+                    <label><input type="checkbox"> Mujer</label>
+                </details>
+            </div>
+            <div class="filter-group">
+                <details>
+                    <summary>Talla</summary>
+                    <label><input type="checkbox"> S</label>
+                    <label><input type="checkbox"> M</label>
+                    <label><input type="checkbox"> L</label>
+                </details>
+            </div>
+            <div class="filter-group">
+                <summary>Rango de precio</summary>
+                <input type="range" min="50" max="1000">
+            </div>
+            <button class="btn-apply">APLICAR FILTROS</button>
+        </aside>
+
+        <section class="products-section">
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://tottobo.vtexassets.com/arquivos/ids/414697/RA26992-2612-N01_2.png?v=639094603343500000" alt="Camiseta">
+                        <span class="discount-tag">30% OFF</span>
+                    </div>
+                    <div class="product-info">
+                        <p class="category">Camiseta para mujer</p>
+                        <h4 class="name">Camiseta Prime Terra</h4>
+                        <p class="price">BS 309,00</p>
+                        <div class="colors">
+                            <span class="dot black"></span>
+                            <span class="dot white"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="img-container">
+                        <img src="https://tottobo.vtexassets.com/arquivos/ids/319919/RA21622-2420-M19XS_1.jpg?v=638724687337770000" alt="Chamarra">
+                    </div>
+                    <div class="product-info">
+                        <p class="category">Chamarra</p>
+                        <h4 class="name">Chamarra Coconut</h4>
+                        <p class="price">BS 665,00</p>
+                        <div class="colors">
+                            <span class="dot purple"></span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </section>
+    </main>
+
 </body>
 </html>
