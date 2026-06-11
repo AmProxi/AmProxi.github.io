@@ -3,84 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Estilo Totto - Catálogo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Marco Para QR</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: #eef2f3;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 520px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        h2 { color: #333; margin-top: 0; }
+        
+        .control-panel {
+            max-height: 50vh;
+            overflow-y: auto;
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .control-group {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .control-group label {
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+            width: 35%;
+        }
+        .control-group input[type="color"] {
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .control-group input[type="text"], 
+        .control-group input[type="number"], 
+        .control-group select {
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 55%;
+            box-sizing: border-box;
+        }
+        .text-row {
+            background: #f0f4f8;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .file-select {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed #ff9800;
+            border-radius: 8px;
+            background: #fff8f0;
+            cursor: pointer;
+        }
+        input[type="file"] { display: none; }
+        .file-select label { color: #ff9800; font-weight: bold; cursor: pointer; display: block; }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #processBtn { background: #ff9800; color: white; }
+        #processBtn:hover { background: #e08600; }
+        #processBtn:disabled { background: #ccc; cursor: not-allowed; }
+        #downloadBtn { background: #2ecc71; color: white; display: none; }
+        #downloadBtn:hover { background: #27ae60; }
+        canvas {
+            max-width: 100%;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <div class="top-bar">Tu confianza es nuestra prioridad en cada entrega.</div>
-        <nav class="main-nav">
-            <div class="logo">MODA<span>SC</span></div>
-            <ul class="menu">
-                <li>VIAJE</li>
-                <li>MOCHILAS</li>
-                <li>ROPA</li>
-                <li>HOMBRE</li>
-                <li>MUJER</li>
-            </ul>
-        </nav>
-    </header>
+<div class="container">
+    <h2>Diseñador de QR</h2>
+    <p>Se aumentó el tamaño del área del QR para una lectura óptima y mejor presentación.</p>
+    
+    <div class="control-panel">
+        <h3 style="margin-top:0; font-size: 16px; color: #ff9800;">🎨 Colores de la Estructura</h3>
+        <div class="control-group">
+            <label>Fondo Externo:</label>
+            <input type="color" id="colorFondoExt" value="#FAB016">
+        </div>
+        <div class="control-group">
+            <label>Borde Externo:</label>
+            <input type="color" id="colorBordeExt" value="#0B3C5D">
+        </div>
+        <div class="control-group">
+            <label>Fondo Interno:</label>
+            <input type="color" id="colorFondoInt" value="#E63946">
+        </div>
+        <div class="control-group">
+            <label>Borde Interno:</label>
+            <input type="color" id="colorBordeInt" value="#FAB016">
+        </div>
 
-    <main class="main-content">
-        <aside class="filters">
-            <h3>Filtrar por</h3>
-            <div class="filter-group">
-                <details open>
-                    <summary>Género</summary>
-                    <label><input type="checkbox"> Hombre</label>
-                    <label><input type="checkbox"> Mujer</label>
-                </details>
-            </div>
-            <div class="filter-group">
-                <details>
-                    <summary>Talla</summary>
-                    <label><input type="checkbox"> S</label>
-                    <label><input type="checkbox"> M</label>
-                    <label><input type="checkbox"> L</label>
-                </details>
-            </div>
-            <div class="filter-group">
-                <summary>Rango de precio</summary>
-                <input type="range" min="50" max="1000">
-            </div>
-            <button class="btn-apply">APLICAR FILTROS</button>
-        </aside>
+        <h3 style="margin-top:15px; font-size: 16px; color: #ff9800;">🔤 Estilo Global de Letra</h3>
+        <div class="control-group">
+            <label>Tipo de Letra:</label>
+            <select id="tipoFuente">
+                <optgroup label="Elegantes y Serias">
+                    <option value='"Georgia", serif' selected>Georgia</option>
+                    <option value='"Times New Roman", serif'>Times New Roman</option>
+                    <option value='"Palatino Linotype", serif'>Palatino</option>
+                    <option value='"Garfield", serif'>Garamond</option>
+                </optgroup>
+                <optgroup label="Modernas y Limpias">
+                    <option value='"Segoe UI", sans-serif'>Segoe UI</option>
+                    <option value='"Arial", sans-serif'>Arial</option>
+                    <option value='"Trebuchet MS", sans-serif'>Trebuchet MS</option>
+                    <option value='"Verdana", sans-serif'>Verdana</option>
+                </optgroup>
+                <optgroup label="Llamativas y Fuertes">
+                    <option value='"Impact", sans-serif'>Impact</option>
+                    <option value='"Arial Black", sans-serif'>Arial Black</option>
+                </optgroup>
+                <optgroup label="Especiales y Retro">
+                    <option value='"Courier New", monospace'>Courier New (Máquina)</option>
+                    <option value='"Comic Sans MS", cursive'>Comic Sans (Divertida)</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Tamaño Base Sup:</label>
+            <input type="number" id="sizeLetrasSup" value="48">
+        </div>
 
-        <section class="products-section">
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="img-container">
-                        <img src="https://tottobo.vtexassets.com/arquivos/ids/414697/RA26992-2612-N01_2.png?v=639094603343500000" alt="Camiseta">
-                        <span class="discount-tag">30% OFF</span>
-                    </div>
-                    <div class="product-info">
-                        <p class="category">Camiseta para mujer</p>
-                        <h4 class="name">Camiseta Prime Terra</h4>
-                        <p class="price">BS 309,00</p>
-                        <div class="colors">
-                            <span class="dot black"></span>
-                            <span class="dot white"></span>
-                        </div>
-                    </div>
-                </div>
+        <h3 style="margin-top:15px; font-size: 16px; color: #ff9800;">✍️ Editar Textos y sus Colores</h3>
+        
+        <div class="text-row">
+            <div class="control-group">
+                <label>Texto 1:</label>
+                <input type="text" id="txtLinea1" value="PRESTAMOS">
+            </div>
+            <div class="control-group">
+                <label>Color Texto 1:</label>
+                <input type="color" id="colorTxt1" value="#0B3C5D">
+            </div>
+        </div>
 
-                <div class="product-card">
-                    <div class="img-container">
-                        <img src="https://tottobo.vtexassets.com/arquivos/ids/319919/RA21622-2420-M19XS_1.jpg?v=638724687337770000" alt="Chamarra">
-                    </div>
-                    <div class="product-info">
-                        <p class="category">Chamarra</p>
-                        <h4 class="name">Chamarra Coconut</h4>
-                        <p class="price">BS 665,00</p>
-                        <div class="colors">
-                            <span class="dot purple"></span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-        </section>
-    </main>
+        <div class="text-row">
+            <div class="control-group">
+                <label>Texto 2:</label>
+                <input type="text" id="txtLinea2" value="MARY">
+            </div>
+            <div class="control-group">
+                <label>Color Texto 2:</label>
+                <input type="color" id="colorTxt2" value="#0B3C5D">
+            </div>
+        </div>
+
+        <div class="text-row">
+            <div class="control-group">
+                <label>Texto Centro:</label>
+                <input type="text" id="txtCentro" value="PLAN 3000">
+            </div>
+            <div class="control-group">
+                <label>Color Centro:</label>
+                <input type="color" id="colorTxtCentro" value="#0B3C5D">
+            </div>
+        </div>
+
+        <div class="text-row">
+            <div class="control-group">
+                <label>Pie de página:</label>
+                <input type="text" id="txtPie" value="MARISOL DANIELA LAMAS PEREZ">
+            </div>
+            <div class="control-group">
+                <label>Color Pie:</label>
+                <input type="color" id="colorTxtPie" value="#0B3C5D">
+            </div>
+        </div>
+    </div>
+
+    <div class="file-select">
+        <label id="fileLabel" for="qrInput">📁 Seleccionar Imagen del QR</label>
+        <input type="file" id="qrInput" accept="image/*">
+    </div>
+    
+    <button id="processBtn" disabled>Generar Diseño</button>
+    <canvas id="canvasResult"></canvas>
+    <button id="downloadBtn">Descargar Imagen Lista</button>
+</div>
+
+<script>
+    const qrInput = document.getElementById('qrInput');
+    const fileLabel = document.getElementById('fileLabel');
+    const processBtn = document.getElementById('processBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const canvas = document.getElementById('canvasResult');
+    const ctx = canvas.getContext('2d');
+
+    const colorFondoExt = document.getElementById('colorFondoExt');
+    const colorBordeExt = document.getElementById('colorBordeExt');
+    const colorFondoInt = document.getElementById('colorFondoInt');
+    const colorBordeInt = document.getElementById('colorBordeInt');
+    const tipoFuente = document.getElementById('tipoFuente');
+    const sizeLetrasSup = document.getElementById('sizeLetrasSup');
+
+    const txtLinea1 = document.getElementById('txtLinea1');
+    const colorTxt1 = document.getElementById('colorTxt1');
+    const txtLinea2 = document.getElementById('txtLinea2');
+    const colorTxt2 = document.getElementById('colorTxt2');
+    const txtCentro = document.getElementById('txtCentro');
+    const colorTxtCentro = document.getElementById('colorTxtCentro');
+    const txtPie = document.getElementById('txtPie');
+    const colorTxtPie = document.getElementById('colorTxtPie');
+
+    let qrImage = new Image();
+
+    qrInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            fileLabel.innerText = "✓ " + file.name;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                qrImage.src = event.target.result;
+                qrImage.onload = () => { processBtn.disabled = false; };
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    processBtn.addEventListener('click', () => {
+        // Mantenemos una resolución excelente para impresión
+        canvas.width = 600;
+        canvas.height = 900;
+
+        const fuente = tipoFuente.value;
+        const fontSizeSup = sizeLetrasSup.value;
+
+        // 1. Fondo Externo
+        ctx.fillStyle = colorFondoExt.value;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 2. Borde Externo Único
+        ctx.strokeStyle = colorBordeExt.value;
+        ctx.lineWidth = 4;
+        ctx.strokeRect(25, 25, canvas.width - 50, canvas.height - 50);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // 3. Texto 1 (PRESTAMOS)
+        ctx.fillStyle = colorTxt1.value; 
+        ctx.font = `bold ${fontSizeSup}px ${fuente}`;
+        ctx.fillText(txtLinea1.value.toUpperCase(), canvas.width / 2, 85);
+        
+        // Texto 2 (MARY)
+        ctx.fillStyle = colorTxt2.value; 
+        ctx.font = `bold ${parseInt(fontSizeSup) + 6}px ${fuente}`;
+        ctx.fillText(txtLinea2.value.toUpperCase(), canvas.width / 2, 145);
+
+        // 4. Recuadro Central AMBPLIADO (Más ancho y alto para el QR gigante)
+        ctx.fillStyle = colorFondoInt.value; 
+        const intX = 40;        // Reducido de 55 a 40 para ganar ancho
+        const intY = 195;       // Subido un poco para ganar alto
+        const intWidth = canvas.width - 80; // Pasa de 490px a 520px de ancho total
+        const intHeight = 610;      // Pasa de 560px a 610px de alto total
+        ctx.fillRect(intX, intY, intWidth, intHeight);
+
+        // Borde Interno del recuadro ampliado
+        ctx.strokeStyle = colorBordeInt.value;
+        ctx.lineWidth = 4;
+        ctx.strokeRect(intX + 12, intY + 12, intWidth - 24, intHeight - 24);
+
+        // 5. Texto Central (PLAN 3000)
+        ctx.font = `bold 42px ${fuente}`;
+        ctx.fillStyle = colorTxtCentro.value; 
+        ctx.fillText(txtCentro.value.toUpperCase(), canvas.width / 2, 255);
+
+        // 6. QR GIGANTE OPTIMIZADO
+        const qrSize = 380; // ¡Aumentado de 320 a 380 píxeles!
+        const qrX = (canvas.width - qrSize) / 2;
+        const qrY = 325; // Reajustado para quedar simétrico
+        
+        // Fondo blanco del QR ampliado
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(qrX - 12, qrY - 12, qrSize + 24, qrSize + 24);
+        ctx.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
+
+        // 7. Texto Inferior (MARISOL DANIELA LAMAS PEREZ)
+        ctx.font = `bold 20px ${fuente}`;
+        ctx.fillStyle = colorTxtPie.value;
+        ctx.fillText(txtPie.value.toUpperCase(), canvas.width / 2, 845);
+
+        canvas.style.display = 'block';
+        downloadBtn.style.display = 'block';
+        processBtn.innerText = "¡Actualizar Diseño!";
+    });
+
+    downloadBtn.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'QR_Grande_Personalizado.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+</script>
 
 </body>
 </html>
